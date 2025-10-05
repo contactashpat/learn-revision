@@ -1,0 +1,5 @@
+# Nest build output
+/dist
+
+# local environment
+.env
