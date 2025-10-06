@@ -12,6 +12,7 @@
   },
   "references": [
     { "path": "./apps/api" },
-    { "path": "./packages/core" }
+    { "path": "./packages/core" },
+    { "path": "./packages/prompts" }
   ]
 }

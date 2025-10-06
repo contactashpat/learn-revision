@@ -1,0 +1,34 @@
+{
+  "technique": "flashcards_index_it",
+  "version": "1.0.0",
+  "language": "it",
+  "prompt": "Crea una serie di flashcard in italiano indicizzate per argomento usando il formato richiesto.",
+  "inputFields": ["topic", "items"],
+  "guardrails": {
+    "maxAnswerLength": 750,
+    "requiredFields": ["flashcards"]
+  },
+  "responseSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "flashcards": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "index": { "type": "integer", "minimum": 1 },
+            "question": { "type": "string", "minLength": 5 },
+            "answer": { "type": "string", "minLength": 5 }
+          },
+          "required": ["index", "question", "answer"],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 20
+      }
+    },
+    "required": ["flashcards"],
+    "additionalProperties": false
+  }
+}

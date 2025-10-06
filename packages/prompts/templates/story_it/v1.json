@@ -1,0 +1,27 @@
+{
+  "technique": "story_it",
+  "version": "1.0.0",
+  "language": "it",
+  "prompt": "Scrivi una breve storia coinvolgente in italiano che includa tutti i concetti forniti e un messaggio formativo chiaro.",
+  "inputFields": ["concepts", "targetAudience", "learningGoal"],
+  "guardrails": {
+    "maxAnswerLength": 900,
+    "requiredFields": ["story", "summary", "keyPoints"]
+  },
+  "responseSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "story": { "type": "string", "minLength": 50 },
+      "summary": { "type": "string", "minLength": 20 },
+      "keyPoints": {
+        "type": "array",
+        "items": { "type": "string", "minLength": 5 },
+        "minItems": 3,
+        "maxItems": 5
+      }
+    },
+    "required": ["story", "summary", "keyPoints"],
+    "additionalProperties": false
+  }
+}

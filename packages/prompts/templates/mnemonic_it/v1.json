@@ -1,0 +1,27 @@
+{
+  "technique": "mnemonic_it",
+  "version": "1.0.0",
+  "language": "it",
+  "prompt": "Genera un mnemonic in italiano per ricordare il termine fornito. Usa immagini mentali vivide e associazioni emozionali." ,
+  "inputFields": ["term", "definition"],
+  "guardrails": {
+    "maxAnswerLength": 600,
+    "requiredFields": ["mnemonic", "explanation"]
+  },
+  "responseSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "mnemonic": { "type": "string", "minLength": 10 },
+      "explanation": { "type": "string", "minLength": 10 },
+      "keywords": {
+        "type": "array",
+        "items": { "type": "string" },
+        "minItems": 1,
+        "maxItems": 5
+      }
+    },
+    "required": ["mnemonic", "explanation"],
+    "additionalProperties": false
+  }
+}
