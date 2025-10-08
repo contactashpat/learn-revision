@@ -5,6 +5,8 @@ node_modules/
 dist/
 build/
 .turbo/
+*.tsbuildinfo
+apps/api/schema.gql
 
 # test coverage
 coverage/

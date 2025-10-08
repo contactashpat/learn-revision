@@ -1,0 +1,16 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Artefact {
+  id          String   @id @default(cuid())
+  technique   String
+  topic       String
+  payloadJson String
+  createdAt   DateTime @default(now())
+}

@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import mnemonicItV1 from '../templates/mnemonic_it/v1.json' assert { type: 'json' };
-import storyItV1 from '../templates/story_it/v1.json' assert { type: 'json' };
-import flashcardsIndexItV1 from '../templates/flashcards_index_it/v1.json' assert { type: 'json' };
+import mnemonicItV1 from '../templates/mnemonic_it/v1.json';
+import storyItV1 from '../templates/story_it/v1.json';
+import flashcardsIndexItV1 from '../templates/flashcards_index_it/v1.json';
 
 export const TEMPLATE_TECHNIQUES = [
   'mnemonic_it',
