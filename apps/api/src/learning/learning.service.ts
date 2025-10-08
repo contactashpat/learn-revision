@@ -13,17 +13,11 @@ import type { CompletionClient } from './learning.constants';
 import {
   CoachLevel,
   CoachResponseModel,
-  FlashcardsPayloadModel,
   MnemonicPayloadModel,
   StoryPayloadModel,
   TechniqueTemplateModel,
 } from './models/learning.models';
-import {
-  CoachInput,
-  CreateFlashcardsInput,
-  CreateMnemonicInput,
-  CreateStoryInput,
-} from './dto/learning.inputs';
+import { CoachInput, CreateMnemonicInput, CreateStoryInput } from './dto/learning.inputs';
 
 const mnemonicInputSchema = z.object({
   term: z.string().min(1),
@@ -50,26 +44,6 @@ type StoryResult = {
   story: string;
   summary: string;
   keyPoints: string[];
-};
-
-const flashcardItemSchema = z.object({
-  term: z.string().min(1),
-  definition: z.string().min(1),
-});
-
-const flashcardsInputSchema = z.object({
-  topic: z.string().min(1),
-  items: z.array(flashcardItemSchema).min(1),
-});
-
-type FlashcardsInput = z.infer<typeof flashcardsInputSchema>;
-
-type FlashcardsResult = {
-  flashcards: Array<{
-    index: number;
-    question: string;
-    answer: string;
-  }>;
 };
 
 const coachInputSchema = z.object({
@@ -177,29 +151,6 @@ export class LearningService {
       summary: data.summary.trim(),
       keyPoints: data.keyPoints,
     } satisfies StoryPayloadModel;
-  }
-
-  async createFlashcards(
-    input: CreateFlashcardsInput,
-    version?: string,
-  ): Promise<FlashcardsPayloadModel> {
-    const parsed = flashcardsInputSchema.parse(input);
-    const data = await this.generateFromTemplate<FlashcardsInput, FlashcardsResult>(
-      'flashcards_index_it',
-      parsed,
-      version,
-    );
-
-    const flashcards = data.flashcards.map((card) => ({
-      index: card.index,
-      question: card.question.trim(),
-      answer: card.answer.trim(),
-    }));
-
-    return {
-      topic: parsed.topic,
-      flashcards,
-    } satisfies FlashcardsPayloadModel;
   }
 
   private async generateFromTemplate<TInput extends Record<string, unknown>, TResult>(

@@ -1,5 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { LearningService } from './learning.service';
+import { FlashcardsService } from './flashcards.service';
 import {
   CoachResponseModel,
   CoachLevel,
@@ -17,7 +18,10 @@ import {
 
 @Resolver()
 export class LearningResolver {
-  constructor(private readonly learningService: LearningService) {}
+  constructor(
+    private readonly learningService: LearningService,
+    private readonly flashcardsService: FlashcardsService,
+  ) {}
 
   @Query(() => [TechniqueTemplateModel])
   techniques(): Promise<TechniqueTemplateModel[]> {
@@ -54,6 +58,6 @@ export class LearningResolver {
     @Args('input') input: CreateFlashcardsInput,
     @Args('version', { type: () => String, nullable: true }) version?: string,
   ): Promise<FlashcardsPayloadModel> {
-    return this.learningService.createFlashcards(input, version);
+    return this.flashcardsService.createFlashcards(input, version);
   }
 }
